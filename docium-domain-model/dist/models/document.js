@@ -1,0 +1,14 @@
+"use strict";
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.dociumDocumentSchema = void 0;
+const zod_1 = __importDefault(require("zod"));
+const base_1 = require("./base");
+const page_1 = require("./page");
+exports.dociumDocumentSchema = base_1.baseSchema.extend({
+    name: zod_1.default.string().min(1).max(500),
+    author: zod_1.default.string(),
+    pages: zod_1.default.array(page_1.dociumDocumentPageSchema),
+});

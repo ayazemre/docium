@@ -1,0 +1,35 @@
+{
+  "name": "docium-commands",
+  "version": "0.0.1",
+  "description": "This package contains definitons of commands that are used in docium project.",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "files": [
+    "/dist"
+  ],
+  "dependencies": {
+    "docium-domain-model": "file:../docium-domain-model"
+  },
+  "devDependencies": {
+    "typescript": "^5.8.2"
+  },
+  "scripts": {
+    "test": "vitest",
+    "build": "tsc"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ayazemre/docium.git"
+  },
+  "keywords": [
+    "docium",
+    "document",
+    "command"
+  ],
+  "author": "Emre Ayaz",
+  "license": "Apache-2.0",
+  "bugs": {
+    "url": "https://github.com/ayazemre/docium/issues"
+  },
+  "homepage": "https://github.com/ayazemre/docium#readme"
+}

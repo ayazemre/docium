@@ -1,0 +1,25 @@
+# Folders
+**/node_modules
+**/test-results
+
+# Output
+**/.output
+**/.vercel
+**/.svelte-kit
+**/build
+
+# OS
+**/.DS_Store
+**/Thumbs.db
+
+# Env
+**/.env
+**/.env.*
+**/!.env.example
+**/!.env.test
+**/./.env
+
+# Vite
+**/vite.config.js.timestamp-*
+**/vite.config.ts.timestamp-*
+

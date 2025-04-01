@@ -1,0 +1,35 @@
+{
+  "name": "docium-domain-model",
+  "version": "0.0.1",
+  "description": "This package contains definitons of models that are used in docium project.",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "files": [
+    "/dist"
+  ],
+  "dependencies": {
+    "zod": "^3.24.2"
+  },
+  "devDependencies": {
+    "typescript": "^5.8.2"
+  },
+  "scripts": {
+    "test": "vitest",
+    "build": "tsc"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ayazemre/docium.git"
+  },
+  "keywords": [
+    "docium",
+    "document",
+    "model"
+  ],
+  "author": "Emre Ayaz",
+  "license": "Apache-2.0",
+  "bugs": {
+    "url": "https://github.com/ayazemre/docium/issues"
+  },
+  "homepage": "https://github.com/ayazemre/docium#readme"
+}
