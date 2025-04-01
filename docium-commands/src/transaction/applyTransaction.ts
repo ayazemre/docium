@@ -1,4 +1,1 @@
-export function applyTransaction(
-  node: DociumDocumentPageNode,
-  transaction: DociumDocumentTransaction
-) {}
+export function applyTransaction() {}

@@ -1,17 +1,19 @@
-import { DociumDocumentState } from "docium-domain-model";
+import { DociumDocumentState, DociumNode } from "docium-domain-model";
 
-export function documentPageOnKeyPress(
-  event: KeyboardEvent,
+export function documentPageOnKeyPress(event: KeyboardEvent) {}
+
+export function documentPageOnFocus(
+  event: Event,
   documentState: DociumDocumentState
-) {
+) {}
+
+export function richTextOnKeyPress(event: KeyboardEvent, node: DociumNode) {
+  event.preventDefault();
   switch (event.key) {
-    case "A":
+    case value:
       break;
-    case "Enter":
-      return "";
+
     default:
       break;
   }
 }
-
-export function richTextOnKeyPress(event: Event, node: DociumNode) {}

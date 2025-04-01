@@ -1,8 +1,7 @@
 <script lang="ts">
-	import { type DociumDocumentState } from 'docium-domain-model';
-	import RichTextNode from './components/RichTextNode.svelte';
-	import ImageNode from './components/ImageNode.svelte';
-	import VideoNode from './components/VideoNode.svelte';
+	import type { DociumDocumentState } from 'docium-domain-model';
+	import DociumPage from './DociumPage.svelte';
+	import { dociumDocumentState } from './dociumState.svelte.js';
 	let { documentState }: { documentState: DociumDocumentState } = $props();
 </script>
 
@@ -14,38 +13,20 @@
 			<button
 				onclick={() => {
 					console.log(documentState);
-
 					documentState.activePageId = (i + 1).toString();
 				}}>{page.name}</button
 			>
 		{/each}
 	</div>
+	<DociumPage pageData={documentState.pages?.find((page) => page.id == documentState.activePageId)!}
+	></DociumPage>
 
-	<div
-		class={'w-full bg-blue-50 p-4' + (documentState.configuration!.isEdit ? ' cursor-text' : '')}
-		onfocus={(e) => {}}
-		role="textbox"
-		tabindex="0"
-	>
-		{#if documentState.pages?.find((page) => page.id == documentState.activePageId)}
-			{#each documentState.pages!.find((page) => page.id == documentState.activePageId)!.nodes! as node}
-				{#if node.type == 'richText'}
-					<RichTextNode nodeData={node} isEditable={documentState.configuration!.isEdit!}
-					></RichTextNode>
-				{:else if node.type == 'image'}
-					<ImageNode></ImageNode>
-				{:else if node.type == 'video'}
-					<VideoNode></VideoNode>
-				{/if}
-			{/each}
-		{:else}
-			load error
-		{/if}
-	</div>
 	<div class="w-1/3 bg-green-50">
 		<button
 			onclick={() => {
-				documentState.configuration!.isEdit = !documentState.configuration!.isEdit;
+				dociumDocumentState.name =
+					'Document editing is ' + dociumDocumentState.configuration!.isEdit;
+				dociumDocumentState.configuration!.isEdit = !dociumDocumentState.configuration!.isEdit;
 			}}>edit</button
 		>
 	</div>

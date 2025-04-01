@@ -1,26 +1,26 @@
-import z from "zod";
+import * as z from "zod";
 export declare const dociumDocumentStateSchema: z.ZodObject<z.objectUtil.extendShape<z.objectUtil.extendShape<{
-    id: z.ZodString;
-    createdAt: z.ZodDefault<z.ZodString>;
-    updatedAt: z.ZodString;
+    id: z.ZodOptional<z.ZodString>;
+    createdAt: z.ZodOptional<z.ZodDefault<z.ZodString>>;
+    updatedAt: z.ZodOptional<z.ZodString>;
 }, {
     name: z.ZodString;
     author: z.ZodDefault<z.ZodString>;
     pages: z.ZodDefault<z.ZodArray<z.ZodObject<z.objectUtil.extendShape<{
-        id: z.ZodString;
-        createdAt: z.ZodDefault<z.ZodString>;
-        updatedAt: z.ZodString;
+        id: z.ZodOptional<z.ZodString>;
+        createdAt: z.ZodOptional<z.ZodDefault<z.ZodString>>;
+        updatedAt: z.ZodOptional<z.ZodString>;
     }, {
         name: z.ZodString;
         nodes: z.ZodArray<z.ZodObject<z.objectUtil.extendShape<{
-            id: z.ZodString;
-            createdAt: z.ZodDefault<z.ZodString>;
-            updatedAt: z.ZodString;
+            id: z.ZodOptional<z.ZodString>;
+            createdAt: z.ZodOptional<z.ZodDefault<z.ZodString>>;
+            updatedAt: z.ZodOptional<z.ZodString>;
         }, {
-            nextNodeId: z.ZodString;
-            type: z.ZodEnum<["richText", "image", "video"]>;
-            data: z.ZodString;
-            metadata: z.ZodRecord<z.ZodString, z.ZodString>;
+            nextNodeId: z.ZodOptional<z.ZodString>;
+            type: z.ZodOptional<z.ZodEnum<["richText", "image", "video"]>>;
+            data: z.ZodOptional<z.ZodString>;
+            metadata: z.ZodOptional<z.ZodRecord<z.ZodString, z.ZodString>>;
         }>, "strip", z.ZodTypeAny, {
             type?: "video" | "image" | "richText";
             data?: string;

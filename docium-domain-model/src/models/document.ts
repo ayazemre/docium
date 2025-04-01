@@ -1,7 +1,6 @@
-import z from "zod";
+import * as z from "zod";
 import { baseSchema } from "./base";
 import { dociumPageSchema } from "./page";
-import { dociumNodeSchema } from "./node";
 
 export const dociumDocumentSchema = baseSchema.extend({
   name: z.string().min(1).max(500),

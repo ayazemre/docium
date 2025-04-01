@@ -1,4 +1,4 @@
-import z from "zod";
+import * as z from "zod";
 import { dociumDocumentSchema } from "./document";
 
 export const dociumDocumentStateSchema = dociumDocumentSchema.extend({
