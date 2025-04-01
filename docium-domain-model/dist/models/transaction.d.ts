@@ -1,0 +1,22 @@
+import z from "zod";
+export declare const dociumTransactionSchema: z.ZodObject<z.objectUtil.extendShape<{
+    id: z.ZodString;
+    createdAt: z.ZodDefault<z.ZodString>;
+    updatedAt: z.ZodString;
+}, {
+    transactionType: z.ZodEnum<["updateNode", "addNode", "removeNode"]>;
+    data: z.ZodString;
+}>, "strip", z.ZodTypeAny, {
+    data?: string;
+    id?: string;
+    createdAt?: string;
+    updatedAt?: string;
+    transactionType?: "updateNode" | "addNode" | "removeNode";
+}, {
+    data?: string;
+    id?: string;
+    createdAt?: string;
+    updatedAt?: string;
+    transactionType?: "updateNode" | "addNode" | "removeNode";
+}>;
+export type DociumTransaction = z.infer<typeof dociumTransactionSchema>;

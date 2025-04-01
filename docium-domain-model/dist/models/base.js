@@ -7,6 +7,6 @@ exports.baseSchema = void 0;
 const zod_1 = __importDefault(require("zod"));
 exports.baseSchema = zod_1.default.object({
     id: zod_1.default.string().uuid(),
-    createdAt: zod_1.default.string().datetime(),
-    updatedAt: zod_1.default.string().datetime(),
+    createdAt: zod_1.default.string().datetime().default(new Date().toUTCString()),
+    updatedAt: zod_1.default.string().datetime(new Date().toUTCString()),
 });

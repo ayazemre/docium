@@ -1,3 +1,4 @@
 export { DociumDocument, dociumDocumentSchema } from "./models/document";
-export { DociumDocumentPage, dociumDocumentPageSchema } from "./models/page";
-export { DociumDocumentPageNode, dociumDocumentPageNodeSchema, } from "./models/node";
+export { DociumPage, dociumPageSchema } from "./models/page";
+export { DociumNode, dociumNodeSchema } from "./models/node";
+export { DociumDocumentState, dociumDocumentStateSchema, } from "./models/documentState";

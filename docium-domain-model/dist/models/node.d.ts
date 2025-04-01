@@ -1,25 +1,28 @@
 import z from "zod";
-export declare const dociumDocumentPageNodeSchema: z.ZodObject<z.objectUtil.extendShape<{
+export declare const dociumNodeSchema: z.ZodObject<z.objectUtil.extendShape<{
     id: z.ZodString;
-    createdAt: z.ZodString;
+    createdAt: z.ZodDefault<z.ZodString>;
     updatedAt: z.ZodString;
 }, {
-    nodeType: z.ZodEnum<["richText", "image", "video"]>;
+    nextNodeId: z.ZodString;
+    type: z.ZodEnum<["richText", "image", "video"]>;
     data: z.ZodString;
     metadata: z.ZodRecord<z.ZodString, z.ZodString>;
 }>, "strip", z.ZodTypeAny, {
+    type?: "video" | "image" | "richText";
     data?: string;
     id?: string;
     metadata?: Record<string, string>;
-    nodeType?: "video" | "image" | "richText";
     createdAt?: string;
     updatedAt?: string;
+    nextNodeId?: string;
 }, {
+    type?: "video" | "image" | "richText";
     data?: string;
     id?: string;
     metadata?: Record<string, string>;
-    nodeType?: "video" | "image" | "richText";
     createdAt?: string;
     updatedAt?: string;
+    nextNodeId?: string;
 }>;
-export type DociumDocumentPageNode = z.infer<typeof dociumDocumentPageNodeSchema>;
+export type DociumNode = z.infer<typeof dociumNodeSchema>;

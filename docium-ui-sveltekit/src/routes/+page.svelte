@@ -1,11 +1,13 @@
 <script lang="ts">
 	import '../app.css';
-	import DocumentContainer from '$lib/DocumentContainer.svelte';
-	import type { DociumDocument } from 'docium-domain-model';
+	import DociumDocument from '$lib/DociumDocument.svelte';
+	import type { DociumDocumentState } from 'docium-domain-model';
 
-	const mockData: DociumDocument = $state({
+	const mockData: DociumDocumentState = $state({
+		configuration: { isEdit: false, allowedNodes: ['richText', 'image'] },
 		name: 'Doc Name',
 		author: 'Document Author',
+		activePageId: '1',
 		pages: [
 			{
 				id: '1',
@@ -27,5 +29,5 @@
 </script>
 
 <div class="w-screen h-screen">
-	<DocumentContainer documentState={mockData} activePageId="1"></DocumentContainer>
+	<DociumDocument documentState={mockData}></DociumDocument>
 </div>

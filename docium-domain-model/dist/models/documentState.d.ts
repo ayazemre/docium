@@ -1,5 +1,5 @@
 import z from "zod";
-export declare const dociumDocumentSchema: z.ZodObject<z.objectUtil.extendShape<{
+export declare const dociumDocumentStateSchema: z.ZodObject<z.objectUtil.extendShape<z.objectUtil.extendShape<{
     id: z.ZodString;
     createdAt: z.ZodDefault<z.ZodString>;
     updatedAt: z.ZodString;
@@ -67,6 +67,18 @@ export declare const dociumDocumentSchema: z.ZodObject<z.objectUtil.extendShape<
             nextNodeId?: string;
         }[];
     }>, "many">>;
+}>, {
+    activePageId: z.ZodString;
+    configuration: z.ZodObject<{
+        isEdit: z.ZodDefault<z.ZodBoolean>;
+        allowedNodes: z.ZodDefault<z.ZodArray<z.ZodString, "many">>;
+    }, "strip", z.ZodTypeAny, {
+        isEdit?: boolean;
+        allowedNodes?: string[];
+    }, {
+        isEdit?: boolean;
+        allowedNodes?: string[];
+    }>;
 }>, "strip", z.ZodTypeAny, {
     name?: string;
     id?: string;
@@ -88,6 +100,11 @@ export declare const dociumDocumentSchema: z.ZodObject<z.objectUtil.extendShape<
             nextNodeId?: string;
         }[];
     }[];
+    activePageId?: string;
+    configuration?: {
+        isEdit?: boolean;
+        allowedNodes?: string[];
+    };
 }, {
     name?: string;
     id?: string;
@@ -109,5 +126,10 @@ export declare const dociumDocumentSchema: z.ZodObject<z.objectUtil.extendShape<
             nextNodeId?: string;
         }[];
     }[];
+    activePageId?: string;
+    configuration?: {
+        isEdit?: boolean;
+        allowedNodes?: string[];
+    };
 }>;
-export type DociumDocument = z.infer<typeof dociumDocumentSchema>;
+export type DociumDocumentState = z.infer<typeof dociumDocumentStateSchema>;

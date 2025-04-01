@@ -9,6 +9,6 @@ const base_1 = require("./base");
 const page_1 = require("./page");
 exports.dociumDocumentSchema = base_1.baseSchema.extend({
     name: zod_1.default.string().min(1).max(500),
-    author: zod_1.default.string(),
-    pages: zod_1.default.array(page_1.dociumDocumentPageSchema),
+    author: zod_1.default.string().default(""),
+    pages: zod_1.default.array(page_1.dociumPageSchema).default([]),
 });

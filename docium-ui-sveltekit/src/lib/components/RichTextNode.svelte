@@ -1,7 +1,15 @@
 <script lang="ts">
-	import type { DociumDocumentPageNode } from 'docium-domain-model';
-
-	const { nodeData }: { nodeData: DociumDocumentPageNode } = $props();
+	import { type DociumNode, dociumNodeSchema } from 'docium-domain-model';
+	const { nodeData, isEditable }: { nodeData: DociumNode; isEditable: boolean } = $props();
 </script>
 
-<p>{nodeData.data}</p>
+<div
+	contenteditable={isEditable}
+	onkeypress={(event: KeyboardEvent) => {
+		event.preventDefault();
+	}}
+	role="textbox"
+	tabindex="0"
+>
+	<p>{nodeData.data}</p>
+</div>

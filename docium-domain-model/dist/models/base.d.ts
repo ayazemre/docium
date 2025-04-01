@@ -1,7 +1,7 @@
 import z from "zod";
 export declare const baseSchema: z.ZodObject<{
     id: z.ZodString;
-    createdAt: z.ZodString;
+    createdAt: z.ZodDefault<z.ZodString>;
     updatedAt: z.ZodString;
 }, "strip", z.ZodTypeAny, {
     id?: string;
