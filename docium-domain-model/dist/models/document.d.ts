@@ -1,71 +1,111 @@
-import * as z from "zod";
-export declare const dociumDocumentSchema: z.ZodObject<z.objectUtil.extendShape<{
+import { z } from "zod";
+export declare const documentSchema: z.ZodObject<z.objectUtil.extendShape<{
     id: z.ZodOptional<z.ZodString>;
-    createdAt: z.ZodOptional<z.ZodDefault<z.ZodString>>;
+    createdAt: z.ZodOptional<z.ZodString>;
     updatedAt: z.ZodOptional<z.ZodString>;
 }, {
     name: z.ZodString;
     author: z.ZodDefault<z.ZodString>;
     pages: z.ZodDefault<z.ZodArray<z.ZodObject<z.objectUtil.extendShape<{
         id: z.ZodOptional<z.ZodString>;
-        createdAt: z.ZodOptional<z.ZodDefault<z.ZodString>>;
+        createdAt: z.ZodOptional<z.ZodString>;
         updatedAt: z.ZodOptional<z.ZodString>;
     }, {
         name: z.ZodString;
-        nodes: z.ZodArray<z.ZodObject<z.objectUtil.extendShape<{
+        blocks: z.ZodOptional<z.ZodArray<z.ZodUnion<[z.ZodObject<z.objectUtil.extendShape<z.objectUtil.extendShape<{
             id: z.ZodOptional<z.ZodString>;
-            createdAt: z.ZodOptional<z.ZodDefault<z.ZodString>>;
+            createdAt: z.ZodOptional<z.ZodString>;
             updatedAt: z.ZodOptional<z.ZodString>;
         }, {
-            nextNodeId: z.ZodOptional<z.ZodString>;
-            type: z.ZodOptional<z.ZodEnum<["richText", "image", "video"]>>;
-            data: z.ZodOptional<z.ZodString>;
-            metadata: z.ZodOptional<z.ZodRecord<z.ZodString, z.ZodString>>;
+            type: z.ZodDefault<z.ZodEnum<["paragraph", "image", "heading1", "heading2", "heading3", "code"]>>;
+            nextBlockId: z.ZodString;
+        }>, {
+            type: z.ZodLiteral<"paragraph">;
+            nodes: z.ZodDefault<z.ZodArray<any, "many">>;
         }>, "strip", z.ZodTypeAny, {
-            type?: "video" | "image" | "richText";
-            data?: string;
+            type?: "paragraph";
             id?: string;
-            metadata?: Record<string, string>;
             createdAt?: string;
             updatedAt?: string;
-            nextNodeId?: string;
+            nextBlockId?: string;
+            nodes?: any[];
         }, {
-            type?: "video" | "image" | "richText";
-            data?: string;
+            type?: "paragraph";
             id?: string;
-            metadata?: Record<string, string>;
             createdAt?: string;
             updatedAt?: string;
-            nextNodeId?: string;
-        }>, "many">;
+            nextBlockId?: string;
+            nodes?: any[];
+        }>, z.ZodObject<z.objectUtil.extendShape<z.objectUtil.extendShape<{
+            id: z.ZodOptional<z.ZodString>;
+            createdAt: z.ZodOptional<z.ZodString>;
+            updatedAt: z.ZodOptional<z.ZodString>;
+        }, {
+            type: z.ZodDefault<z.ZodEnum<["paragraph", "image", "heading1", "heading2", "heading3", "code"]>>;
+            nextBlockId: z.ZodString;
+        }>, {
+            type: z.ZodLiteral<"image">;
+            src: z.ZodString;
+            alt: z.ZodOptional<z.ZodString>;
+        }>, "strip", z.ZodTypeAny, {
+            type?: "image";
+            id?: string;
+            createdAt?: string;
+            updatedAt?: string;
+            nextBlockId?: string;
+            src?: string;
+            alt?: string;
+        }, {
+            type?: "image";
+            id?: string;
+            createdAt?: string;
+            updatedAt?: string;
+            nextBlockId?: string;
+            src?: string;
+            alt?: string;
+        }>]>, "many">>;
     }>, "strip", z.ZodTypeAny, {
         name?: string;
         id?: string;
         createdAt?: string;
         updatedAt?: string;
-        nodes?: {
-            type?: "video" | "image" | "richText";
-            data?: string;
+        blocks?: ({
+            type?: "paragraph";
             id?: string;
-            metadata?: Record<string, string>;
             createdAt?: string;
             updatedAt?: string;
-            nextNodeId?: string;
-        }[];
+            nextBlockId?: string;
+            nodes?: any[];
+        } | {
+            type?: "image";
+            id?: string;
+            createdAt?: string;
+            updatedAt?: string;
+            nextBlockId?: string;
+            src?: string;
+            alt?: string;
+        })[];
     }, {
         name?: string;
         id?: string;
         createdAt?: string;
         updatedAt?: string;
-        nodes?: {
-            type?: "video" | "image" | "richText";
-            data?: string;
+        blocks?: ({
+            type?: "paragraph";
             id?: string;
-            metadata?: Record<string, string>;
             createdAt?: string;
             updatedAt?: string;
-            nextNodeId?: string;
-        }[];
+            nextBlockId?: string;
+            nodes?: any[];
+        } | {
+            type?: "image";
+            id?: string;
+            createdAt?: string;
+            updatedAt?: string;
+            nextBlockId?: string;
+            src?: string;
+            alt?: string;
+        })[];
     }>, "many">>;
 }>, "strip", z.ZodTypeAny, {
     name?: string;
@@ -78,15 +118,22 @@ export declare const dociumDocumentSchema: z.ZodObject<z.objectUtil.extendShape<
         id?: string;
         createdAt?: string;
         updatedAt?: string;
-        nodes?: {
-            type?: "video" | "image" | "richText";
-            data?: string;
+        blocks?: ({
+            type?: "paragraph";
             id?: string;
-            metadata?: Record<string, string>;
             createdAt?: string;
             updatedAt?: string;
-            nextNodeId?: string;
-        }[];
+            nextBlockId?: string;
+            nodes?: any[];
+        } | {
+            type?: "image";
+            id?: string;
+            createdAt?: string;
+            updatedAt?: string;
+            nextBlockId?: string;
+            src?: string;
+            alt?: string;
+        })[];
     }[];
 }, {
     name?: string;
@@ -99,15 +146,22 @@ export declare const dociumDocumentSchema: z.ZodObject<z.objectUtil.extendShape<
         id?: string;
         createdAt?: string;
         updatedAt?: string;
-        nodes?: {
-            type?: "video" | "image" | "richText";
-            data?: string;
+        blocks?: ({
+            type?: "paragraph";
             id?: string;
-            metadata?: Record<string, string>;
             createdAt?: string;
             updatedAt?: string;
-            nextNodeId?: string;
-        }[];
+            nextBlockId?: string;
+            nodes?: any[];
+        } | {
+            type?: "image";
+            id?: string;
+            createdAt?: string;
+            updatedAt?: string;
+            nextBlockId?: string;
+            src?: string;
+            alt?: string;
+        })[];
     }[];
 }>;
-export type DociumDocument = z.infer<typeof dociumDocumentSchema>;
+export type Document = z.infer<typeof documentSchema>;

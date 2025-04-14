@@ -1,0 +1,16 @@
+{
+  "name": "docium-server",
+  "version": "0.0.1",
+  "description": "This is a sample server for docium document editing.",
+  "main": "index.js",
+  "scripts": {
+    "test": "npm run test"
+  },
+  "keywords": [
+    "docium",
+    "document",
+    "text"
+  ],
+  "author": "Emre Ayaz",
+  "license": "Apache-2.0"
+}

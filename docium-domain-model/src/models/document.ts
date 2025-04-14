@@ -1,11 +1,11 @@
-import * as z from "zod";
+import { z } from "zod";
 import { baseSchema } from "./base";
-import { dociumPageSchema } from "./page";
+import { pageSchema } from "./page";
 
-export const dociumDocumentSchema = baseSchema.extend({
+export const documentSchema = baseSchema.extend({
   name: z.string().min(1).max(500),
   author: z.string().default(""),
-  pages: z.array(dociumPageSchema).default([]),
+  pages: z.array(pageSchema).default([]),
 });
 
-export type DociumDocument = z.infer<typeof dociumDocumentSchema>;
+export type Document = z.infer<typeof documentSchema>;

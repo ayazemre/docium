@@ -1,10 +1,11 @@
-import * as z from "zod";
+import { z } from "zod";
 import { baseSchema } from "./base";
-import { dociumNodeSchema } from "./node";
+import { inlineNodeSchema } from "./paragraph";
+import { imageBlockSchema, paragraphBlockSchema } from "./blocks";
 
-export const dociumPageSchema = baseSchema.extend({
+export const pageSchema = baseSchema.extend({
   name: z.string().min(1).max(500),
-  nodes: z.array(dociumNodeSchema),
+  blocks: z.array(z.union([paragraphBlockSchema, imageBlockSchema])).optional(),
 });
 
-export type DociumPage = z.infer<typeof dociumPageSchema>;
+export type Page = z.infer<typeof pageSchema>;

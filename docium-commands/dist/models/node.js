@@ -1,13 +1,44 @@
 "use strict";
-var __importDefault = (this && this.__importDefault) || function (mod) {
-    return (mod && mod.__esModule) ? mod : { "default": mod };
-};
+var __createBinding = (this && this.__createBinding) || (Object.create ? (function(o, m, k, k2) {
+    if (k2 === undefined) k2 = k;
+    var desc = Object.getOwnPropertyDescriptor(m, k);
+    if (!desc || ("get" in desc ? !m.__esModule : desc.writable || desc.configurable)) {
+      desc = { enumerable: true, get: function() { return m[k]; } };
+    }
+    Object.defineProperty(o, k2, desc);
+}) : (function(o, m, k, k2) {
+    if (k2 === undefined) k2 = k;
+    o[k2] = m[k];
+}));
+var __setModuleDefault = (this && this.__setModuleDefault) || (Object.create ? (function(o, v) {
+    Object.defineProperty(o, "default", { enumerable: true, value: v });
+}) : function(o, v) {
+    o["default"] = v;
+});
+var __importStar = (this && this.__importStar) || (function () {
+    var ownKeys = function(o) {
+        ownKeys = Object.getOwnPropertyNames || function (o) {
+            var ar = [];
+            for (var k in o) if (Object.prototype.hasOwnProperty.call(o, k)) ar[ar.length] = k;
+            return ar;
+        };
+        return ownKeys(o);
+    };
+    return function (mod) {
+        if (mod && mod.__esModule) return mod;
+        var result = {};
+        if (mod != null) for (var k = ownKeys(mod), i = 0; i < k.length; i++) if (k[i] !== "default") __createBinding(result, mod, k[i]);
+        __setModuleDefault(result, mod);
+        return result;
+    };
+})();
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.dociumDocumentPageNodeSchema = void 0;
-const zod_1 = __importDefault(require("zod"));
+exports.dociumNodeSchema = void 0;
+const z = __importStar(require("zod"));
 const base_1 = require("./base");
-exports.dociumDocumentPageNodeSchema = base_1.baseSchema.extend({
-    nodeType: zod_1.default.enum(["richText", "image", "video"]),
-    data: zod_1.default.string(),
-    metadata: zod_1.default.record(zod_1.default.string(), zod_1.default.string()),
+exports.dociumNodeSchema = base_1.baseSchema.extend({
+    nextNodeId: z.string().uuid().optional(),
+    type: z.enum(["richText", "image", "video"]).optional(),
+    data: z.string().optional(),
+    metadata: z.record(z.string(), z.string()).optional(),
 });

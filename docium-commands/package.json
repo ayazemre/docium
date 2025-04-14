@@ -1,10 +1,9 @@
 {
   "name": "docium-commands",
   "version": "0.0.1",
-  "description": "This package contains definitons of commands that are used in docium project.",
+  "description": "This package contains commands that are used in docium project.",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
-  "type": "module",
   "files": [
     "/dist"
   ],
@@ -12,11 +11,13 @@
     "docium-domain-model": "file:../docium-domain-model"
   },
   "devDependencies": {
-    "typescript": "^5.8.2"
+    "typescript": "^5.8.2",
+    "vitest": "^3.1.1"
   },
   "scripts": {
+    "build": "tsc",
     "test": "vitest",
-    "build": "tsc"
+    "coverage": "vitest run --coverage"
   },
   "repository": {
     "type": "git",
