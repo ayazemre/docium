@@ -4,31 +4,30 @@ export declare const pageOperationSchema: z.ZodObject<z.objectUtil.extendShape<{
     createdAt: z.ZodOptional<z.ZodString>;
     updatedAt: z.ZodOptional<z.ZodString>;
 }, {
-    operationType: z.ZodEnum<["createBlock", "updateBlock", "deleteBlock", "moveBlock"]>;
+    type: z.ZodEnum<["createBlock", "updateBlock", "deleteBlock", "moveBlock"]>;
     pageId: z.ZodString;
 }>, "strip", z.ZodTypeAny, {
+    type?: "createBlock" | "updateBlock" | "deleteBlock" | "moveBlock";
     id?: string;
     createdAt?: string;
     updatedAt?: string;
-    operationType?: "createBlock" | "updateBlock" | "deleteBlock" | "moveBlock";
     pageId?: string;
 }, {
+    type?: "createBlock" | "updateBlock" | "deleteBlock" | "moveBlock";
     id?: string;
     createdAt?: string;
     updatedAt?: string;
-    operationType?: "createBlock" | "updateBlock" | "deleteBlock" | "moveBlock";
     pageId?: string;
 }>;
-export type PageOperation = z.infer<typeof pageOperationSchema>;
 export declare const createBlockOperationSchema: z.ZodObject<z.objectUtil.extendShape<z.objectUtil.extendShape<{
     id: z.ZodOptional<z.ZodString>;
     createdAt: z.ZodOptional<z.ZodString>;
     updatedAt: z.ZodOptional<z.ZodString>;
 }, {
-    operationType: z.ZodEnum<["createBlock", "updateBlock", "deleteBlock", "moveBlock"]>;
+    type: z.ZodEnum<["createBlock", "updateBlock", "deleteBlock", "moveBlock"]>;
     pageId: z.ZodString;
 }>, {
-    operationType: z.ZodLiteral<"createBlock">;
+    type: z.ZodLiteral<"createBlock">;
     block: z.ZodUnion<[z.ZodObject<z.objectUtil.extendShape<z.objectUtil.extendShape<{
         id: z.ZodOptional<z.ZodString>;
         createdAt: z.ZodOptional<z.ZodString>;
@@ -38,21 +37,21 @@ export declare const createBlockOperationSchema: z.ZodObject<z.objectUtil.extend
         nextBlockId: z.ZodString;
     }>, {
         type: z.ZodLiteral<"paragraph">;
-        nodes: z.ZodDefault<z.ZodArray<any, "many">>;
+        nodes: z.ZodDefault<z.ZodArray<z.ZodType<import("../paragraph").InlineNode, z.ZodTypeDef, import("../paragraph").InlineNode>, "many">>;
     }>, "strip", z.ZodTypeAny, {
         type?: "paragraph";
         id?: string;
         createdAt?: string;
         updatedAt?: string;
         nextBlockId?: string;
-        nodes?: any[];
+        nodes?: import("../paragraph").InlineNode[];
     }, {
         type?: "paragraph";
         id?: string;
         createdAt?: string;
         updatedAt?: string;
         nextBlockId?: string;
-        nodes?: any[];
+        nodes?: import("../paragraph").InlineNode[];
     }>, z.ZodObject<z.objectUtil.extendShape<z.objectUtil.extendShape<{
         id: z.ZodOptional<z.ZodString>;
         createdAt: z.ZodOptional<z.ZodString>;
@@ -82,13 +81,14 @@ export declare const createBlockOperationSchema: z.ZodObject<z.objectUtil.extend
         alt?: string;
     }>]>;
 }>, "strip", z.ZodTypeAny, {
+    type?: "createBlock";
     block?: {
         type?: "paragraph";
         id?: string;
         createdAt?: string;
         updatedAt?: string;
         nextBlockId?: string;
-        nodes?: any[];
+        nodes?: import("../paragraph").InlineNode[];
     } | {
         type?: "image";
         id?: string;
@@ -101,16 +101,16 @@ export declare const createBlockOperationSchema: z.ZodObject<z.objectUtil.extend
     id?: string;
     createdAt?: string;
     updatedAt?: string;
-    operationType?: "createBlock";
     pageId?: string;
 }, {
+    type?: "createBlock";
     block?: {
         type?: "paragraph";
         id?: string;
         createdAt?: string;
         updatedAt?: string;
         nextBlockId?: string;
-        nodes?: any[];
+        nodes?: import("../paragraph").InlineNode[];
     } | {
         type?: "image";
         id?: string;
@@ -123,7 +123,6 @@ export declare const createBlockOperationSchema: z.ZodObject<z.objectUtil.extend
     id?: string;
     createdAt?: string;
     updatedAt?: string;
-    operationType?: "createBlock";
     pageId?: string;
 }>;
 export type CreateBlockOperation = z.infer<typeof createBlockOperationSchema>;
@@ -132,10 +131,10 @@ export declare const updateBlockOperationSchema: z.ZodObject<z.objectUtil.extend
     createdAt: z.ZodOptional<z.ZodString>;
     updatedAt: z.ZodOptional<z.ZodString>;
 }, {
-    operationType: z.ZodEnum<["createBlock", "updateBlock", "deleteBlock", "moveBlock"]>;
+    type: z.ZodEnum<["createBlock", "updateBlock", "deleteBlock", "moveBlock"]>;
     pageId: z.ZodString;
 }>, {
-    operationType: z.ZodLiteral<"updateBlock">;
+    type: z.ZodLiteral<"updateBlock">;
     block: z.ZodUnion<[z.ZodObject<z.objectUtil.extendShape<z.objectUtil.extendShape<{
         id: z.ZodOptional<z.ZodString>;
         createdAt: z.ZodOptional<z.ZodString>;
@@ -145,21 +144,21 @@ export declare const updateBlockOperationSchema: z.ZodObject<z.objectUtil.extend
         nextBlockId: z.ZodString;
     }>, {
         type: z.ZodLiteral<"paragraph">;
-        nodes: z.ZodDefault<z.ZodArray<any, "many">>;
+        nodes: z.ZodDefault<z.ZodArray<z.ZodType<import("../paragraph").InlineNode, z.ZodTypeDef, import("../paragraph").InlineNode>, "many">>;
     }>, "strip", z.ZodTypeAny, {
         type?: "paragraph";
         id?: string;
         createdAt?: string;
         updatedAt?: string;
         nextBlockId?: string;
-        nodes?: any[];
+        nodes?: import("../paragraph").InlineNode[];
     }, {
         type?: "paragraph";
         id?: string;
         createdAt?: string;
         updatedAt?: string;
         nextBlockId?: string;
-        nodes?: any[];
+        nodes?: import("../paragraph").InlineNode[];
     }>, z.ZodObject<z.objectUtil.extendShape<z.objectUtil.extendShape<{
         id: z.ZodOptional<z.ZodString>;
         createdAt: z.ZodOptional<z.ZodString>;
@@ -190,13 +189,14 @@ export declare const updateBlockOperationSchema: z.ZodObject<z.objectUtil.extend
     }>]>;
     targetBlockId: z.ZodString;
 }>, "strip", z.ZodTypeAny, {
+    type?: "updateBlock";
     block?: {
         type?: "paragraph";
         id?: string;
         createdAt?: string;
         updatedAt?: string;
         nextBlockId?: string;
-        nodes?: any[];
+        nodes?: import("../paragraph").InlineNode[];
     } | {
         type?: "image";
         id?: string;
@@ -209,17 +209,17 @@ export declare const updateBlockOperationSchema: z.ZodObject<z.objectUtil.extend
     id?: string;
     createdAt?: string;
     updatedAt?: string;
-    operationType?: "updateBlock";
     pageId?: string;
     targetBlockId?: string;
 }, {
+    type?: "updateBlock";
     block?: {
         type?: "paragraph";
         id?: string;
         createdAt?: string;
         updatedAt?: string;
         nextBlockId?: string;
-        nodes?: any[];
+        nodes?: import("../paragraph").InlineNode[];
     } | {
         type?: "image";
         id?: string;
@@ -232,66 +232,66 @@ export declare const updateBlockOperationSchema: z.ZodObject<z.objectUtil.extend
     id?: string;
     createdAt?: string;
     updatedAt?: string;
-    operationType?: "updateBlock";
     pageId?: string;
     targetBlockId?: string;
 }>;
-export type UpdateBlockOperation = z.infer<typeof pageOperationSchema>;
+export type UpdateBlockOperation = z.infer<typeof updateBlockOperationSchema>;
 export declare const deleteBlockOperationSchema: z.ZodObject<z.objectUtil.extendShape<z.objectUtil.extendShape<{
     id: z.ZodOptional<z.ZodString>;
     createdAt: z.ZodOptional<z.ZodString>;
     updatedAt: z.ZodOptional<z.ZodString>;
 }, {
-    operationType: z.ZodEnum<["createBlock", "updateBlock", "deleteBlock", "moveBlock"]>;
+    type: z.ZodEnum<["createBlock", "updateBlock", "deleteBlock", "moveBlock"]>;
     pageId: z.ZodString;
 }>, {
-    operationType: z.ZodLiteral<"deleteBlock">;
-    blockId: z.ZodString;
+    type: z.ZodLiteral<"deleteBlock">;
+    targetBlockId: z.ZodString;
 }>, "strip", z.ZodTypeAny, {
+    type?: "deleteBlock";
     id?: string;
     createdAt?: string;
     updatedAt?: string;
-    operationType?: "deleteBlock";
     pageId?: string;
-    blockId?: string;
+    targetBlockId?: string;
 }, {
+    type?: "deleteBlock";
     id?: string;
     createdAt?: string;
     updatedAt?: string;
-    operationType?: "deleteBlock";
     pageId?: string;
-    blockId?: string;
+    targetBlockId?: string;
 }>;
-export type DeleteBlockOperation = z.infer<typeof pageOperationSchema>;
+export type DeleteBlockOperation = z.infer<typeof deleteBlockOperationSchema>;
 export declare const moveBlockOperationSchema: z.ZodObject<z.objectUtil.extendShape<z.objectUtil.extendShape<{
     id: z.ZodOptional<z.ZodString>;
     createdAt: z.ZodOptional<z.ZodString>;
     updatedAt: z.ZodOptional<z.ZodString>;
 }, {
-    operationType: z.ZodEnum<["createBlock", "updateBlock", "deleteBlock", "moveBlock"]>;
+    type: z.ZodEnum<["createBlock", "updateBlock", "deleteBlock", "moveBlock"]>;
     pageId: z.ZodString;
 }>, {
-    operationType: z.ZodLiteral<"moveBlock">;
+    type: z.ZodLiteral<"moveBlock">;
     targetBlockId: z.ZodString;
     nextBlockId: z.ZodNumber;
     previousBlockId: z.ZodString;
 }>, "strip", z.ZodTypeAny, {
+    type?: "moveBlock";
     id?: string;
     createdAt?: string;
     updatedAt?: string;
     nextBlockId?: number;
-    operationType?: "moveBlock";
     pageId?: string;
     targetBlockId?: string;
     previousBlockId?: string;
 }, {
+    type?: "moveBlock";
     id?: string;
     createdAt?: string;
     updatedAt?: string;
     nextBlockId?: number;
-    operationType?: "moveBlock";
     pageId?: string;
     targetBlockId?: string;
     previousBlockId?: string;
 }>;
-export type MoveBlockOperation = z.infer<typeof pageOperationSchema>;
+export type MoveBlockOperation = z.infer<typeof moveBlockOperationSchema>;
+export type PageOperation = CreateBlockOperation | UpdateBlockOperation | DeleteBlockOperation | MoveBlockOperation;

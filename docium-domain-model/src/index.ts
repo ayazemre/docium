@@ -1,5 +1,7 @@
 export { Document, documentSchema } from "./models/document";
+
 export { Page, pageSchema } from "./models/page";
+
 export {
   BoldNode,
   ItalicNode,
@@ -12,7 +14,9 @@ export {
   italicNodeSchema,
   linkNodeSchema,
 } from "./models/paragraph";
+
 export { ParagraphBlock, paragraphBlockSchema } from "./models/blocks";
+
 export {
   PageOperation,
   pageOperationSchema,
@@ -25,7 +29,10 @@ export {
   MoveBlockOperation,
   moveBlockOperationSchema,
 } from "./models/operations/pageOperations";
+
 export {
+  ParagraphOperation,
+  paragraphOperationSchema,
   InsertTextOperation,
   insertTextOperationSchema,
   DeleteTextOperation,

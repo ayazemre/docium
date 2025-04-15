@@ -3,39 +3,39 @@ import { baseSchema } from "../base";
 import { imageBlockSchema, paragraphBlockSchema } from "../blocks";
 
 export const pageOperationSchema = baseSchema.extend({
-  operationType: z.enum([
-    "createBlock",
-    "updateBlock",
-    "deleteBlock",
-    "moveBlock",
-  ]),
+  type: z.enum(["createBlock", "updateBlock", "deleteBlock", "moveBlock"]),
   pageId: z.string().uuid(),
 });
-export type PageOperation = z.infer<typeof pageOperationSchema>;
 
 export const createBlockOperationSchema = pageOperationSchema.extend({
-  operationType: z.literal("createBlock"),
+  type: z.literal("createBlock"),
   block: z.union([paragraphBlockSchema, imageBlockSchema]),
 });
 export type CreateBlockOperation = z.infer<typeof createBlockOperationSchema>;
 
 export const updateBlockOperationSchema = pageOperationSchema.extend({
-  operationType: z.literal("updateBlock"),
+  type: z.literal("updateBlock"),
   block: z.union([paragraphBlockSchema, imageBlockSchema]),
   targetBlockId: z.string().uuid(),
 });
-export type UpdateBlockOperation = z.infer<typeof pageOperationSchema>;
+export type UpdateBlockOperation = z.infer<typeof updateBlockOperationSchema>;
 
 export const deleteBlockOperationSchema = pageOperationSchema.extend({
-  operationType: z.literal("deleteBlock"),
-  blockId: z.string().uuid(),
+  type: z.literal("deleteBlock"),
+  targetBlockId: z.string().uuid(),
 });
-export type DeleteBlockOperation = z.infer<typeof pageOperationSchema>;
+export type DeleteBlockOperation = z.infer<typeof deleteBlockOperationSchema>;
 
 export const moveBlockOperationSchema = pageOperationSchema.extend({
-  operationType: z.literal("moveBlock"),
+  type: z.literal("moveBlock"),
   targetBlockId: z.string().uuid(),
   nextBlockId: z.number(),
   previousBlockId: z.string(),
 });
-export type MoveBlockOperation = z.infer<typeof pageOperationSchema>;
+export type MoveBlockOperation = z.infer<typeof moveBlockOperationSchema>;
+
+export type PageOperation =
+  | CreateBlockOperation
+  | UpdateBlockOperation
+  | DeleteBlockOperation
+  | MoveBlockOperation;

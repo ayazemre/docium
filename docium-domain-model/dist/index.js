@@ -1,6 +1,6 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.deleteTextOperationSchema = exports.insertTextOperationSchema = exports.moveBlockOperationSchema = exports.deleteBlockOperationSchema = exports.updateBlockOperationSchema = exports.createBlockOperationSchema = exports.pageOperationSchema = exports.paragraphBlockSchema = exports.linkNodeSchema = exports.italicNodeSchema = exports.inlineNodeSchema = exports.textNodeSchema = exports.boldNodeSchema = exports.pageSchema = exports.documentSchema = void 0;
+exports.deleteTextOperationSchema = exports.insertTextOperationSchema = exports.paragraphOperationSchema = exports.moveBlockOperationSchema = exports.deleteBlockOperationSchema = exports.updateBlockOperationSchema = exports.createBlockOperationSchema = exports.pageOperationSchema = exports.paragraphBlockSchema = exports.linkNodeSchema = exports.italicNodeSchema = exports.inlineNodeSchema = exports.textNodeSchema = exports.boldNodeSchema = exports.pageSchema = exports.documentSchema = void 0;
 var document_1 = require("./models/document");
 Object.defineProperty(exports, "documentSchema", { enumerable: true, get: function () { return document_1.documentSchema; } });
 var page_1 = require("./models/page");
@@ -20,5 +20,6 @@ Object.defineProperty(exports, "updateBlockOperationSchema", { enumerable: true,
 Object.defineProperty(exports, "deleteBlockOperationSchema", { enumerable: true, get: function () { return pageOperations_1.deleteBlockOperationSchema; } });
 Object.defineProperty(exports, "moveBlockOperationSchema", { enumerable: true, get: function () { return pageOperations_1.moveBlockOperationSchema; } });
 var paragraphOperations_1 = require("./models/operations/paragraphOperations");
+Object.defineProperty(exports, "paragraphOperationSchema", { enumerable: true, get: function () { return paragraphOperations_1.paragraphOperationSchema; } });
 Object.defineProperty(exports, "insertTextOperationSchema", { enumerable: true, get: function () { return paragraphOperations_1.insertTextOperationSchema; } });
 Object.defineProperty(exports, "deleteTextOperationSchema", { enumerable: true, get: function () { return paragraphOperations_1.deleteTextOperationSchema; } });

@@ -8,21 +8,21 @@ export declare const paragraphBlockSchema: z.ZodObject<z.objectUtil.extendShape<
     nextBlockId: z.ZodString;
 }>, {
     type: z.ZodLiteral<"paragraph">;
-    nodes: z.ZodDefault<z.ZodArray<any, "many">>;
+    nodes: z.ZodDefault<z.ZodArray<z.ZodType<import("./paragraph").InlineNode, z.ZodTypeDef, import("./paragraph").InlineNode>, "many">>;
 }>, "strip", z.ZodTypeAny, {
     type?: "paragraph";
     id?: string;
     createdAt?: string;
     updatedAt?: string;
     nextBlockId?: string;
-    nodes?: any[];
+    nodes?: import("./paragraph").InlineNode[];
 }, {
     type?: "paragraph";
     id?: string;
     createdAt?: string;
     updatedAt?: string;
     nextBlockId?: string;
-    nodes?: any[];
+    nodes?: import("./paragraph").InlineNode[];
 }>;
 export type ParagraphBlock = z.infer<typeof paragraphBlockSchema>;
 export declare const imageBlockSchema: z.ZodObject<z.objectUtil.extendShape<z.objectUtil.extendShape<{

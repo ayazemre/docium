@@ -14,21 +14,21 @@ export declare const pageSchema: z.ZodObject<z.objectUtil.extendShape<{
         nextBlockId: z.ZodString;
     }>, {
         type: z.ZodLiteral<"paragraph">;
-        nodes: z.ZodDefault<z.ZodArray<any, "many">>;
+        nodes: z.ZodDefault<z.ZodArray<z.ZodType<import("./paragraph").InlineNode, z.ZodTypeDef, import("./paragraph").InlineNode>, "many">>;
     }>, "strip", z.ZodTypeAny, {
         type?: "paragraph";
         id?: string;
         createdAt?: string;
         updatedAt?: string;
         nextBlockId?: string;
-        nodes?: any[];
+        nodes?: import("./paragraph").InlineNode[];
     }, {
         type?: "paragraph";
         id?: string;
         createdAt?: string;
         updatedAt?: string;
         nextBlockId?: string;
-        nodes?: any[];
+        nodes?: import("./paragraph").InlineNode[];
     }>, z.ZodObject<z.objectUtil.extendShape<z.objectUtil.extendShape<{
         id: z.ZodOptional<z.ZodString>;
         createdAt: z.ZodOptional<z.ZodString>;
@@ -68,7 +68,7 @@ export declare const pageSchema: z.ZodObject<z.objectUtil.extendShape<{
         createdAt?: string;
         updatedAt?: string;
         nextBlockId?: string;
-        nodes?: any[];
+        nodes?: import("./paragraph").InlineNode[];
     } | {
         type?: "image";
         id?: string;
@@ -89,7 +89,7 @@ export declare const pageSchema: z.ZodObject<z.objectUtil.extendShape<{
         createdAt?: string;
         updatedAt?: string;
         nextBlockId?: string;
-        nodes?: any[];
+        nodes?: import("./paragraph").InlineNode[];
     } | {
         type?: "image";
         id?: string;
