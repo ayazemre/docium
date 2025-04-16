@@ -8,18 +8,13 @@ import {
 } from "./paragraphOperations";
 
 export const blockOperationSchema = baseSchema.extend({
-  type: z.enum([
-    "createBlock",
-    "updateBlock",
-    "deleteBlock",
-    "applyBlockOperation",
-  ]),
+  type: z.enum(["createBlock", "updateBlock", "deleteBlock"]),
   targetBlockId: z.string().uuid(),
 });
 
 export const createBlockOperationSchema = blockOperationSchema.extend({
   type: z.literal("createBlock"),
-  newBlock: z.union([paragraphBlockSchema, imageBlockSchema]),
+  block: z.union([paragraphBlockSchema, imageBlockSchema]),
 });
 export type CreateBlockOperation = z.infer<typeof createBlockOperationSchema>;
 
@@ -34,7 +29,7 @@ export const deleteBlockOperationSchema = blockOperationSchema.extend({
 });
 export type DeleteBlockOperation = z.infer<typeof deleteBlockOperationSchema>;
 
-export const applyBlockOperationSchema = blockOperationSchema.extend({
+export const applyBlockSubOperationSchema = blockOperationSchema.extend({
   type: z.literal("applyBlockOperation"),
   blockOperationType: z.enum(["paragraph", "image", "video", "audio", "code"]),
   operation: z.union([
@@ -43,10 +38,12 @@ export const applyBlockOperationSchema = blockOperationSchema.extend({
     splitTextNodeOperationSchema,
   ]),
 });
-export type ApplyBlockOperation = z.infer<typeof applyBlockOperationSchema>;
+export type ApplyBlockSubOperation = z.infer<
+  typeof applyBlockSubOperationSchema
+>;
 
 export type BlockOperation =
   | CreateBlockOperation
   | UpdateBlockOperation
   | DeleteBlockOperation
-  | ApplyBlockOperation;
+  | ApplyBlockSubOperation;

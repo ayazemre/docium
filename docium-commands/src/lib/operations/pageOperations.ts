@@ -27,8 +27,11 @@ export function createPage(
   pages: Page[],
   operation: CreatePageOperation
 ): Page[] {
-  const newPage: Page = { ...operation.page, blocks: [] };
-  return [...pages, operation.page];
+  const newPage: Page = {
+    ...operation.page,
+    blocks: [{ type: "paragraph", nodes: [{ type: "text", content: "" }] }],
+  };
+  return [...pages, newPage];
 }
 export function updatePage(
   pages: Page[],
@@ -37,6 +40,7 @@ export function updatePage(
   const pageIndex = pages.findIndex(
     (page) => page.id === operation.targetPageId
   );
+  if (pageIndex === -1) console.error("cannot find");
   if (pageIndex === -1) return pages;
   const newState = deepCopy(pages);
   newState[pageIndex] = operation.page;

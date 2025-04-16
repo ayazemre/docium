@@ -4,9 +4,7 @@
       "target": "ESNext",
       "declaration": true,
       "outDir": "./dist",
-      
+      "baseUrl": ".",
     },
-    "include": [
-      "src/**/*"
-, "../docium-domain-model/src/operations/blockOperations.ts"    ]
+    "include": ["src/**/*"] 
   }

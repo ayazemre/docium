@@ -1,109 +1,115 @@
 import { describe, expect, it } from "vitest";
 import {
-  CreateBlockOperation,
-  DeleteBlockOperation,
-  Page,
-  UpdateBlockOperation,
+  CreatePageOperation,
+  DeletePageOperation,
+  UpdatePageOperation,
 } from "docium-domain-model";
+import { applyPageOperation } from "../../../src/lib/operations/pageOperations";
 
 describe("Page Operations - Successfull Operations", () => {
-  const mockPageData: Page = {
-    id: "123456",
+  const mockDocumentData = {
+    id: crypto.randomUUID(),
     name: "Test Page",
-    blocks: [],
+    pages: [],
     createdAt: new Date().toISOString(),
     updatedAt: new Date().toISOString(),
   };
-  it("Create a new block in the page", () => {
-    const mockCreateBlockOperation: CreateBlockOperation = {
+  it("Create a new page in the document", () => {
+    const mockCreatePageOperation: CreatePageOperation = {
       id: "123",
-      pageId: "123456",
-      type: "createBlock",
-      block: { id: "123", type: "paragraph" },
+      type: "createPage",
+      page: { id: "2", name: "Test Page" },
       createdAt: new Date().toISOString(),
       updatedAt: new Date().toISOString(),
     };
 
     const newPageData = applyPageOperation(
-      mockPageData,
-      mockCreateBlockOperation
+      mockDocumentData.pages,
+      mockCreatePageOperation
     );
-    expect(
-      newPageData.blocks?.find((block) => block.type == "paragraph")
-    ).toBeTruthy();
-    expect(newPageData.blocks?.find((block) => block.id == "123")).toBeTruthy();
-    expect(mockPageData.blocks?.find((block) => block.id == "123")).toBeFalsy();
+    console.log(newPageData);
+    expect(newPageData?.find((page) => page.id == "2")).toBeTruthy();
+    expect(mockDocumentData.pages.length).toBe(0);
   });
 
-  it("Update a block in the page", () => {
-    const mockUpdateBlockOperation: UpdateBlockOperation = {
+  it("Update a page in the document", () => {
+    const mockCreatePageOperation: CreatePageOperation = {
       id: "123",
-      type: "updateBlock",
-      targetBlockId: "123",
-      newBlock: { id: "123", type: "paragraph", nextBlockId: "1234" },
-      createdAt: new Date().toISOString(),
-      updatedAt: new Date().toISOString(),
-    };
-    const mockCreateBlockOperation: CreateBlockOperation = {
-      id: "123",
-      type: "createBlock",
-      newBlock: { id: "123", type: "paragraph" },
+      type: "createPage",
+      page: { id: "2", name: "Test Page" },
       createdAt: new Date().toISOString(),
       updatedAt: new Date().toISOString(),
     };
 
     const newPageData = applyPageOperation(
-      mockPageData,
-      mockCreateBlockOperation
+      mockDocumentData.pages,
+      mockCreatePageOperation
     );
-
-    expect(
-      newPageData.blocks?.find((block) => block.type == "paragraph")
-    ).toBeTruthy();
-    expect(newPageData.blocks?.find((block) => block.id == "123")).toBeTruthy();
-    expect(mockPageData.blocks?.find((block) => block.id == "123")).toBeFalsy();
+    expect(mockDocumentData.pages.length).toBe(0);
+    const mockUpdatePageOperation: UpdatePageOperation = {
+      id: "123",
+      type: "updatePage",
+      targetPageId: "2",
+      page: { id: "2", name: "Test Page Updated" },
+      createdAt: new Date().toISOString(),
+      updatedAt: new Date().toISOString(),
+    };
 
     const updatedPageData = applyPageOperation(
       newPageData,
-      mockUpdateBlockOperation
+      mockUpdatePageOperation
     );
-
-    expect(
-      updatedPageData.blocks?.find((block) => block.nextBlockId == "1234")
-    ).toBeTruthy();
+    expect(mockDocumentData.pages.length).toBe(0);
+    expect(updatedPageData?.find((page) => page.id == "2")).toBeTruthy();
+    expect(updatedPageData?.find((page) => page.id == "2")?.name).toBe(
+      "Test Page Updated"
+    );
   });
   it("Delete a block in the page", () => {
-    const mockDeleteBlockOperation: DeleteBlockOperation = {
+    const mockCreatePageOperation: CreatePageOperation = {
       id: "123",
-      type: "deleteBlock",
-      targetBlockId: "123",
-      createdAt: new Date().toISOString(),
-      updatedAt: new Date().toISOString(),
-    };
-
-    const mockCreateBlockOperation: CreateBlockOperation = {
-      id: "123",
-      type: "createBlock",
-      newBlock: { id: "123", type: "paragraph" },
+      type: "createPage",
+      page: { id: "2", name: "Test Page" },
       createdAt: new Date().toISOString(),
       updatedAt: new Date().toISOString(),
     };
 
     const newPageData = applyPageOperation(
-      mockPageData,
-      mockCreateBlockOperation
+      mockDocumentData.pages,
+      mockCreatePageOperation
     );
-    expect(
-      newPageData.blocks?.find((block) => block.type == "paragraph")
-    ).toBeTruthy();
-    expect(newPageData.blocks?.find((block) => block.id == "123")).toBeTruthy();
-    expect(mockPageData.blocks?.find((block) => block.id == "123")).toBeFalsy();
+    expect(mockDocumentData.pages.length).toBe(0);
+    const mockUpdatePageOperation: UpdatePageOperation = {
+      id: "123",
+      type: "updatePage",
+      targetPageId: "2",
+      page: { id: "2", name: "Test Page Updated" },
+      createdAt: new Date().toISOString(),
+      updatedAt: new Date().toISOString(),
+    };
 
     const updatedPageData = applyPageOperation(
       newPageData,
-      mockDeleteBlockOperation
+      mockUpdatePageOperation
     );
-    expect(updatedPageData.blocks?.length == 0).toBeTruthy();
+    expect(mockDocumentData.pages.length).toBe(0);
+    expect(updatedPageData?.find((page) => page.id == "2")).toBeTruthy();
+    expect(updatedPageData?.find((page) => page.id == "2")?.name).toBe(
+      "Test Page Updated"
+    );
+
+    const mockDeletePageOperation: DeletePageOperation = {
+      targetPageId: "2",
+      type: "deletePage",
+    };
+
+    const deletedPageData = applyPageOperation(
+      updatedPageData,
+      mockDeletePageOperation
+    );
+
+    expect(mockDocumentData.pages.length).toBe(0);
+    expect(deletedPageData.length).toBe(0);
   });
   it("Move a block in the page", () => {});
 });

@@ -15,7 +15,7 @@ export type CreatePageOperation = z.infer<typeof createPageOperationSchema>;
 
 export const updatePageOperationSchema = pageOperationSchema.extend({
   type: z.literal("updatePage"),
-  page: pageSchema.omit({ blocks: true }),
+  newPage: pageSchema.omit({ blocks: true }),
 });
 export type UpdatePageOperation = z.infer<typeof updatePageOperationSchema>;
 
