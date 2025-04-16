@@ -1,22 +1,17 @@
 import {
   Document,
-  PageOperation,
+  BlockOperation,
   Page,
   CreateBlockOperation,
   UpdateBlockOperation,
   DeleteBlockOperation,
-  MoveBlockOperation,
 } from "docium-domain-model";
 import { deepCopy } from "../utilities.ts/dataUtilities";
 
-export function applyPageOperation(
+export function applyBlockOperation(
   pageState: Page,
-  operation: PageOperation
+  operation: BlockOperation
 ): Page {
-  if (pageState.id != operation.pageId) {
-    console.error("operation page id mismatch");
-    return pageState;
-  }
   switch (operation.type) {
     case "createBlock":
       return createBlock(pageState, operation);
@@ -24,8 +19,6 @@ export function applyPageOperation(
       return updateBlock(pageState, operation);
     case "deleteBlock":
       return deleteBlock(pageState, operation);
-    case "moveBlock":
-      return moveBlock(pageState, operation);
     default:
       return pageState;
   }
@@ -33,7 +26,7 @@ export function applyPageOperation(
 
 export function createBlock(page: Page, operation: CreateBlockOperation): Page {
   const newState = deepCopy(page);
-  newState.blocks.push(operation.block);
+  newState.blocks.push(operation.newBlock);
   return newState;
 }
 export function updateBlock(page: Page, operation: UpdateBlockOperation): Page {
@@ -42,7 +35,7 @@ export function updateBlock(page: Page, operation: UpdateBlockOperation): Page {
   );
   if (targetBlock == -1) return page;
   const newState = deepCopy(page);
-  newState.blocks[targetBlock] = operation.block;
+  newState.blocks[targetBlock] = operation.newBlock;
   return newState;
 }
 export function deleteBlock(page: Page, operation: DeleteBlockOperation): Page {
@@ -55,7 +48,4 @@ export function deleteBlock(page: Page, operation: DeleteBlockOperation): Page {
     (block) => block.id != operation.targetBlockId
   );
   return newState;
-}
-export function moveBlock(page: Page, operation: MoveBlockOperation): Page {
-  return page;
 }

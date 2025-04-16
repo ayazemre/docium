@@ -1,8 +1,8 @@
 import { z } from "zod";
-import { baseSchema } from "../base";
+import { baseSchema } from "../data/base";
 
 export const paragraphOperationSchema = baseSchema.extend({
-  type: z.enum(["insertText", "deleteText", "splitTextNode"]),
+  type: z.enum(["insertText", "deleteText", "splitInlineNode"]),
   targetNodeId: z.string().uuid(),
 });
 
@@ -21,15 +21,15 @@ export const deleteTextOperationSchema = paragraphOperationSchema.extend({
 export type DeleteTextOperation = z.infer<typeof deleteTextOperationSchema>;
 
 export const splitTextNodeOperationSchema = paragraphOperationSchema.extend({
-  type: z.literal("deleteText"),
+  type: z.literal("splitInlineNode"),
   offset: z.number(),
   length: z.number(),
 });
-export type SplitTextNodeOperation = z.infer<
+export type SplitInlineNodeOperation = z.infer<
   typeof splitTextNodeOperationSchema
 >;
 
 export type ParagraphOperation =
   | InsertTextOperation
   | DeleteTextOperation
-  | SplitTextNodeOperation;
+  | SplitInlineNodeOperation;

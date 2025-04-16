@@ -8,5 +8,5 @@
     },
     "include": [
       "src/**/*"
-, "../docium-domain-model/src/models/operations/pageOperations.ts"    ]
+, "../docium-domain-model/src/operations/blockOperations.ts"    ]
   }

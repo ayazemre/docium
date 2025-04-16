@@ -21,7 +21,7 @@ describe("Paragraph Operations - Successfull Operations", () => {
       {
         id: "3",
         type: "italic",
-        children: [{ id: "5", type: "text", content: "Bold" }],
+        children: [{ id: "5", type: "text", content: "Italic" }],
       },
     ],
     createdAt: new Date().toISOString(),

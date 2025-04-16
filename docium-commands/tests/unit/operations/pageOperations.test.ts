@@ -5,7 +5,6 @@ import {
   Page,
   UpdateBlockOperation,
 } from "docium-domain-model";
-import { applyPageOperation } from "../../../src/lib/operations/blockOperations";
 
 describe("Page Operations - Successfull Operations", () => {
   const mockPageData: Page = {
@@ -39,18 +38,16 @@ describe("Page Operations - Successfull Operations", () => {
   it("Update a block in the page", () => {
     const mockUpdateBlockOperation: UpdateBlockOperation = {
       id: "123",
-      pageId: "123456",
       type: "updateBlock",
       targetBlockId: "123",
-      block: { id: "123", type: "paragraph", nextBlockId: "1234" },
+      newBlock: { id: "123", type: "paragraph", nextBlockId: "1234" },
       createdAt: new Date().toISOString(),
       updatedAt: new Date().toISOString(),
     };
     const mockCreateBlockOperation: CreateBlockOperation = {
       id: "123",
-      pageId: "123456",
       type: "createBlock",
-      block: { id: "123", type: "paragraph" },
+      newBlock: { id: "123", type: "paragraph" },
       createdAt: new Date().toISOString(),
       updatedAt: new Date().toISOString(),
     };
@@ -78,7 +75,6 @@ describe("Page Operations - Successfull Operations", () => {
   it("Delete a block in the page", () => {
     const mockDeleteBlockOperation: DeleteBlockOperation = {
       id: "123",
-      pageId: "123456",
       type: "deleteBlock",
       targetBlockId: "123",
       createdAt: new Date().toISOString(),
@@ -87,9 +83,8 @@ describe("Page Operations - Successfull Operations", () => {
 
     const mockCreateBlockOperation: CreateBlockOperation = {
       id: "123",
-      pageId: "123456",
       type: "createBlock",
-      block: { id: "123", type: "paragraph" },
+      newBlock: { id: "123", type: "paragraph" },
       createdAt: new Date().toISOString(),
       updatedAt: new Date().toISOString(),
     };

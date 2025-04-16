@@ -1,7 +1,6 @@
-export { Document, documentSchema } from "./models/document";
-
-export { Page, pageSchema } from "./models/page";
-
+// Data Models for State Representation and Validation
+export { Document, documentSchema } from "./data/document";
+export { Page, pageSchema } from "./data/page";
 export {
   BoldNode,
   ItalicNode,
@@ -13,22 +12,37 @@ export {
   inlineNodeSchema,
   italicNodeSchema,
   linkNodeSchema,
-} from "./models/paragraph";
+} from "./data/paragraph";
 
-export { ParagraphBlock, paragraphBlockSchema } from "./models/blocks";
+export { ParagraphBlock, paragraphBlockSchema } from "./data/blocks";
+
+// Operation Models for State Mutations
+export {
+  DocumentOperation,
+  documentOperationSchema,
+} from "./operations/documentOperations";
 
 export {
   PageOperation,
   pageOperationSchema,
+  CreatePageOperation,
+  createPageOperationSchema,
+  UpdatePageOperation,
+  updatePageOperationSchema,
+  DeletePageOperation,
+  deletePageOperationSchema,
+} from "./operations/pageOperations";
+
+export {
+  BlockOperation,
+  blockOperationSchema,
   CreateBlockOperation,
   createBlockOperationSchema,
   UpdateBlockOperation,
   updateBlockOperationSchema,
   DeleteBlockOperation,
   deleteBlockOperationSchema,
-  MoveBlockOperation,
-  moveBlockOperationSchema,
-} from "./models/operations/pageOperations";
+} from "./operations/blockOperations";
 
 export {
   ParagraphOperation,
@@ -37,4 +51,4 @@ export {
   insertTextOperationSchema,
   DeleteTextOperation,
   deleteTextOperationSchema,
-} from "./models/operations/paragraphOperations";
+} from "./operations/paragraphOperations";
