@@ -1,25 +1,25 @@
-import { z } from "zod";
-import { baseSchema } from "../data/base";
+import { z } from "@zod/mini";
+import { baseSchema } from "../base";
 import { pageSchema } from "../data/page";
 
-export const pageOperationSchema = baseSchema.extend({
+export const pageOperationSchema = z.extend(baseSchema,{
   type: z.enum(["createPage", "updatePage", "deletePage"]),
-  targetPageId: z.string().uuid(),
+  targetPageId: z.uuidv4(),
 });
 
-export const createPageOperationSchema = pageOperationSchema.extend({
+export const createPageOperationSchema = z.extend(pageOperationSchema,{
   type: z.literal("createPage"),
-  page: pageSchema.omit({ blocks: true }),
+  page: z.omit(pageSchema,{ blocks: true }),
 });
 export type CreatePageOperation = z.infer<typeof createPageOperationSchema>;
 
-export const updatePageOperationSchema = pageOperationSchema.extend({
+export const updatePageOperationSchema = z.extend(pageOperationSchema,{
   type: z.literal("updatePage"),
-  newPage: pageSchema.omit({ blocks: true }),
+  newPage: z.omit(pageSchema,{ blocks: true }),
 });
 export type UpdatePageOperation = z.infer<typeof updatePageOperationSchema>;
 
-export const deletePageOperationSchema = pageOperationSchema.extend({
+export const deletePageOperationSchema = z.extend(pageOperationSchema,{
   type: z.literal("deletePage"),
 });
 export type DeletePageOperation = z.infer<typeof deletePageOperationSchema>;

@@ -1,5 +1,5 @@
 import { z } from "zod";
-import { baseSchema } from "../data/base";
+import { baseSchema } from "../base";
 import { documentSchema } from "../data/document";
 
 export const documentOperationSchema = baseSchema.extend({

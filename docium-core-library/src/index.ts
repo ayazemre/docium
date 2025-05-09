@@ -20,7 +20,7 @@ export { ParagraphBlock, paragraphBlockSchema } from "./data/blocks";
 export {
   DocumentOperation,
   documentOperationSchema,
-} from "./operations/documentOperations";
+} from "./models/operations/documentOperations";
 
 export {
   PageOperation,
@@ -31,7 +31,7 @@ export {
   updatePageOperationSchema,
   DeletePageOperation,
   deletePageOperationSchema,
-} from "./operations/pageOperations";
+} from "./models/operations/pageOperations";
 
 export {
   BlockOperation,
@@ -42,7 +42,7 @@ export {
   updateBlockOperationSchema,
   DeleteBlockOperation,
   deleteBlockOperationSchema,
-} from "./operations/blockOperations";
+} from "./models/operations/blockOperations";
 
 export {
   ParagraphOperation,
@@ -51,4 +51,4 @@ export {
   insertTextOperationSchema,
   DeleteTextOperation,
   deleteTextOperationSchema,
-} from "./operations/paragraphOperations";
+} from "./models/operations/paragraphOperations";

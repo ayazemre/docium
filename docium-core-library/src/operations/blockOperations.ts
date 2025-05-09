@@ -1,5 +1,5 @@
 import { z } from "zod";
-import { baseSchema } from "../data/base";
+import { baseSchema } from "../base";
 import { imageBlockSchema, paragraphBlockSchema } from "../data/blocks";
 import {
   deleteTextOperationSchema,
