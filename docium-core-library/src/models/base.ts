@@ -1,10 +1,13 @@
 import { z } from "@zod/mini";
 
 export const baseSchema = z.object({
-  id: z.optional(z.uuid()),
-  createdAt: z.optional(z.iso.datetime(new Date().toISOString())),
-  updatedAt: z.optional(z.iso.datetime(new Date().toISOString())),
+  id: z.uuid(),
+  createdAt: z.iso.datetime(new Date().toISOString()),
+  updatedAt: z.iso.datetime(new Date().toISOString()),
 });
+export const entitySchemaPartial = z.partial(baseSchema);
+
+export type BaseSchema = z.infer<typeof baseSchema>;
 
 z.globalRegistry.add(baseSchema, {
   id: "baseSchema",
@@ -19,5 +22,3 @@ z.globalRegistry.add(baseSchema, {
     },
   ],
 });
-
-export type BaseSchema = z.infer<typeof baseSchema>;
