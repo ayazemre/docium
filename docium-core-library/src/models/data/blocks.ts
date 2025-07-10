@@ -1,35 +1,33 @@
-import { inlineNodeSchema } from "./paragraph";
-import { baseSchema } from "../base";
+import { inlineNodeModel } from "./paragraph";
 import { z } from "@zod/mini";
 
-const baseBlockSchema = z.extend(baseSchema,{
-  type: z
-    .enum(["paragraph", "image", "heading1", "heading2", "heading3", "code"]),
-  nextBlockId: z.uuid(),
+const baseBlockModel = z.strictObject({
+	type: z.enum(["paragraph", "image", "heading1", "heading2", "heading3", "code", "video"]),
+	nextBlockId: z.uuid(),
 });
 
-export const paragraphBlockSchema = z.extend(baseBlockSchema,{
-  type: z.literal("paragraph"),
-  nodes: z.array(inlineNodeSchema).check(z.maxLength(100)),
+export const paragraphBlockModel = z.extend(baseBlockModel, {
+	type: z.literal("paragraph"),
+	nodes: z.array(inlineNodeModel).check(z.maxLength(100)),
 });
-export type ParagraphBlock = z.infer<typeof paragraphBlockSchema>;
+export type ParagraphBlock = z.infer<typeof paragraphBlockModel>;
 
-export const imageBlockSchema = z.extend(baseBlockSchema,{
-  type: z.literal("image"),
-  src: z.url(),
-  alt: z.string().check(z.maxLength(500)),
+export const imageBlockModel = z.extend(baseBlockModel, {
+	type: z.literal("image"),
+	src: z.url(),
+	alt: z.string().check(z.maxLength(500)),
 });
-export type ImageBlock = z.infer<typeof imageBlockSchema>;
+export type ImageBlock = z.infer<typeof imageBlockModel>;
 
-const headingBlockSchema = z.extend(baseBlockSchema,{
-  type: z.enum(["heading1", "heading2", "heading3"]),
-  content: z.string().check(z.maxLength(500),z.minLength(1)),
+const headingBlockModel = z.extend(baseBlockModel, {
+	type: z.enum(["heading1", "heading2", "heading3"]),
+	content: z.string().check(z.maxLength(500), z.minLength(1)),
 });
-export type HeadingBlock = z.infer<typeof headingBlockSchema>;
+export type HeadingBlock = z.infer<typeof headingBlockModel>;
 
-const codeBlockSchema = z.extend(baseBlockSchema,{
-  type: z.literal("code"),
-  language: z.enum(["js", "ts", "html", "css"]),
-  content: z.string(),
+export const codeBlockModel = z.extend(baseBlockModel, {
+	type: z.literal("code"),
+	language: z.enum(["js", "ts", "html", "css"]),
+	content: z.string(),
 });
-export type CodeBlock = z.infer<typeof codeBlockSchema>;
+export type CodeBlock = z.infer<typeof codeBlockModel>;

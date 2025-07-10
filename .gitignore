@@ -1,25 +1,14 @@
-# Folders
-**/node_modules
-**/test-results
-
-# Output
-**/.output
-**/.vercel
-**/.svelte-kit
-**/build
-
-# OS
-**/.DS_Store
-**/Thumbs.db
-
-# Env
-**/.env
-**/.env.*
-**/!.env.example
-**/!.env.test
-**/./.env
-
-# Vite
-**/vite.config.js.timestamp-*
-**/vite.config.ts.timestamp-*
+coverage
+temporary
+package-lock.json
+dist
+node_modules
+test-results
+.DS_Store
+Thumbs.db
+.env
+build
+.sveltekit
+.vercel
+.output
 

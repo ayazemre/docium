@@ -1,13 +1,10 @@
 import { z } from "@zod/mini";
-import { baseSchema } from "../base";
-import { inlineNodeSchema } from "./paragraph";
-import { imageBlockSchema, paragraphBlockSchema } from "./blocks";
 
-export const pageSchema = z.extend(baseSchema, {
-  name: z.optional(z.string().check(z.maxLength(500), z.minLength(1))),
-  blocks: z.optional(
-    z.array(z.union([paragraphBlockSchema, imageBlockSchema]))
-  ),
+import { imageBlockModel, paragraphBlockModel } from "./blocks";
+
+export const pageModel = z.strictObject({
+	name: z.string().check(z.maxLength(500), z.minLength(1)),
+	blocks: z.array(z.union([paragraphBlockModel, imageBlockModel])),
 });
 
-export type Page = z.infer<typeof pageSchema>;
+export type Page = z.infer<typeof pageModel>;
